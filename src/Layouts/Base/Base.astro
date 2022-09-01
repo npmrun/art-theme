@@ -1,0 +1,28 @@
+---
+import BaseHead from "@blog/components/BaseHead.astro";
+import { siteInfo } from "@blog/config";
+
+export interface Props {
+  title?: string;
+  desc?: string;
+  icon?: string;
+}
+
+const { title, desc, icon } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html lang={siteInfo.lang} class="h-full">
+  <head>
+    <BaseHead
+      title={title || siteInfo.siteName}
+      desc={desc || siteInfo.siteDesc}
+      icon={icon || siteInfo.icon}
+    />
+    <slot name="head" />
+    <script src="/theme-change.js" is:inline></script>
+</head>
+<body class=" bg-slate-100 h-full md:!overflow-auto">
+    <slot />
+</body>
+</html>

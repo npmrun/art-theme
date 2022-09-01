@@ -1,0 +1,62 @@
+---
+import BlogPage from "@blog/Layouts/BlogPage.astro";
+import Card from "@blog/components/category/Card.vue";
+import { published } from "@blog/utils";
+import { settings, siteInfo } from "@blog/config";
+
+const customizedCategories = settings.categories ?? [];
+
+const allPosts = await published();
+let allCategories = allPosts
+    .filter(
+        (f) =>
+            f.categories != undefined &&
+            f.categories.length !== 0 &&
+            f.draft != true
+    )
+    .map((p) => p.categories)
+    .reduce((a, b) => {
+        return a.concat(b);
+    }, []);
+const uniqueCategories = Object.entries(
+    allCategories.reduce((a, b) => {
+        a[b] = (a[b] || 0) + 1;
+        return a;
+    }, {})
+).map(([k, v]: [string, number]) => ({ name: k, count: v }));
+
+const categories = uniqueCategories.map((category) => {
+    var customizedCategory = customizedCategories.find(
+        (a) => a.name === category.name
+    );
+    var item = {
+        name: category.name,
+        count: category.count,
+        desc: customizedCategory?.desc,
+        image: customizedCategory?.image,
+        order: customizedCategory?.order,
+    };
+    return item;
+});
+
+let sortedCategories =
+    settings.categorySettings.order === "count"
+        ? categories.sort((a, b) => {
+              if (a.order == undefined) return -1;
+              if (b.order == undefined) return -1;
+              if (a.order < b.order) return 1;
+              return b.count - a.count;
+          })
+        : categories.sort((a, b) => {
+              if (a.order == undefined) return -1;
+              if (b.order == undefined) return -1;
+              if (a.order < b.order) return 1;
+              return a.name.localeCompare(b.name);
+          });
+---
+
+<BlogPage hero={siteInfo.hero} heroPosition={siteInfo.heroPosition}>
+    <main class="flex flex-wrap justify-center gap-8">
+        {sortedCategories.map((category: any) => <Card category={category} />)}
+    </main>
+</BlogPage>

@@ -1,0 +1,46 @@
+{
+    "name": "art-blog",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "hack": "tsx ./scripts/hack.ts",
+        "prepareIndex": "tsx ./scripts/search/prepare-index.ts",
+        "postinstall": "npm run hack",
+        "dev": "astro dev",
+        "start": "astro dev",
+        "build": "npm run prepareIndex && astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "devDependencies": {
+        "@astrojs/mdx": "^0.10.0",
+        "@astrojs/rss": "^1.0.0",
+        "@astrojs/sitemap": "^1.0.0",
+        "@types/fs-extra": "^9.0.13",
+        "astro": "^1.0.6",
+        "astro-robots-txt": "^0.3.8",
+        "autoprefixer": "^10.4.8",
+        "fs-extra": "^10.1.0",
+        "globby": "^13.1.2",
+        "rehype-autolink-headings": "^6.1.1",
+        "rehype-slug": "^5.0.1",
+        "sass": "^1.54.4",
+        "shiki": "^0.11.1",
+        "theme-change": "^2.2.0",
+        "tsx": "^3.9.0"
+    },
+    "dependencies": {
+        "@astrojs/partytown": "^1.0.0",
+        "@astrojs/tailwind": "^1.0.0",
+        "@astrojs/vue": "^1.0.0",
+        "@sarissa/pagination": "^1.0.3",
+        "astro-compress": "^1.0.5",
+        "astro-icon": "^0.7.3",
+        "astro-imagetools": "^0.6.10",
+        "clipboard": "^2.0.11",
+        "flowchart.js": "^1.17.1",
+        "prism-theme-vars": "^0.2.4",
+        "viewerjs": "^1.10.5",
+        "vue": "^3.2.37"
+    }
+}

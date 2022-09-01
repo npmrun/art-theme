@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>sequence-diagrams</title>
+    </head>
+    <body>
+        <script src="https://bramp.github.io/js-sequence-diagrams/js/webfont.js"></script>
+        <script src="https://bramp.github.io/js-sequence-diagrams/js/snap.svg-min.js"></script>
+        <script src="https://bramp.github.io/js-sequence-diagrams/js/underscore-min.js"></script>
+        <script src="https://bramp.github.io/js-sequence-diagrams/js/sequence-diagram-min.js"></script>
+        <link
+            href="https://bramp.github.io/js-sequence-diagrams/css/sequence-diagram-min.css"
+            rel="stylesheet"
+        />
+        <div id="diagram"></div>
+        <script>
+            var diagram = Diagram.parse("A->B: Message");
+            diagram.drawSVG("diagram", { theme: "hand" });
+        </script>
+    </body>
+</html>

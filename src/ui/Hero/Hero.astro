@@ -1,0 +1,120 @@
+---
+interface Props {
+    bg: string;
+    position?: string;
+}
+const { bg, position = "center" } = Astro.props as Props;
+const haveSlot = Astro.slots.has("default")
+
+---
+
+<style lang="scss">
+    @import "./style.scss";
+    .center{
+        @apply bg-center;
+    }
+    .top{
+        @apply bg-top;
+    }
+    .bottom{
+        @apply bg-bottom;
+    }
+    .sh{
+        @apply brightness-[.85];
+    }
+</style>
+<div class="bg md:h-[550px] pb-[250px]">
+    <figure
+        class={`w-full block absolute h-full bg-cover ${position} bg-no-repeat ${haveSlot?'sh':''}`}
+        style={`background-image: url(${bg});`}
+    >
+    </figure>
+    <div class="line md:h-[550px] h-[250px]"></div>
+    <div class="title text-white text-[45px] md:block hidden"><slot></slot></div>
+    <svg
+        class="waves"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 24 150 28"
+        preserveAspectRatio="none"
+        shape-rendering="auto"
+    >
+        <defs>
+            <path
+                id="gentle-wave"
+                d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 15.945 h -352 z"
+            ></path>
+        </defs>
+        <g class="parallax">
+            <use
+                xlink:href="#gentle-wave"
+                x="48"
+                y="0"
+                fill="rgba(255,255,255,0.7)"></use>
+            <use
+                xlink:href="#gentle-wave"
+                x="48"
+                y="3"
+                fill="rgba(255,255,255,0.5)"></use>
+            <use
+                xlink:href="#gentle-wave"
+                x="48"
+                y="5"
+                fill="rgba(255,255,255,0.3)"></use>
+            <use xlink:href="#gentle-wave" x="48" y="7" fill="#f1f5f9"></use>
+        </g>
+    </svg>
+    <style>
+        .waves {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 15vh;
+            /*Fix for safari gap*/
+            /* margin-bottom: -7px;  */
+            min-height: 100px;
+            max-height: 150px;
+        }
+        .parallax > use {
+            animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5)
+                infinite;
+        }
+        .parallax > use:nth-child(1) {
+            animation-delay: -2s;
+            animation-duration: 7s;
+        }
+        .parallax > use:nth-child(2) {
+            animation-delay: -3s;
+            animation-duration: 10s;
+        }
+        .parallax > use:nth-child(3) {
+            animation-delay: -4s;
+            animation-duration: 13s;
+        }
+        .parallax > use:nth-child(4) {
+            animation-delay: -5s;
+            animation-duration: 20s;
+        }
+        @keyframes move-forever {
+            0% {
+                transform: translate3d(-90px, 0, 0);
+            }
+            100% {
+                transform: translate3d(85px, 0, 0);
+            }
+        }
+        /*Shrinking for mobile*/
+        @media (max-width: 768px) {
+            .waves {
+                height: 40px;
+                min-height: 40px;
+            }
+            .content {
+                height: 30vh;
+            }
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</div>

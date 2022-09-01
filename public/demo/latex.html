@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Latex Demo</title>
+    </head>
+    <body>
+        <span>$Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$</span>
+        <div>$$ x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$</div>
+
+        <script>
+            window.MathJax = {
+                tex: {
+                    inlineMath: [
+                        ["$", "$"],
+                        ["\\(", "\\)"],
+                    ],
+                },
+                svg: {
+                    displayAlign: "center",
+                    fontCache: "global",
+                },
+            };
+
+            (function () {
+                var script = document.createElement("script");
+                script.src =
+                    "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
+                script.async = true;
+                document.head.appendChild(script);
+            })();
+        </script>
+    </body>
+</html>

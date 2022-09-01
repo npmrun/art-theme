@@ -1,0 +1,99 @@
+---
+import BlogPage from "@blog/Layouts/BlogPage.astro";
+import { praseDemo } from "@blog/utils/demo";
+import { siteInfo } from "@blog/config";
+
+const demoes = praseDemo();
+
+const keys = Object.keys(demoes);
+---
+
+<BlogPage hero={siteInfo.hero} heroPosition={siteInfo.heroPosition}>
+    <main class="relative demoes">
+        <ul
+            class="right-full top-0 whitespace-nowrap text-right mr-[15px] md:absolute static mb-[8px] max-h-[300px] overflow-auto md:max-h-none"
+        >
+            {
+                keys &&
+                    keys.map((v, i) => (
+                        <>
+                            <li class="text-gray-400 text-[14px] my-[8px] cursor-pointer">
+                                <label for={`collapsible${i}`} class="label">
+                                    <span>{v}</span>
+                                </label>
+                                <input
+                                    id={`collapsible${i}`}
+                                    class="hidden toggle"
+                                    checked
+                                    type="checkbox"
+                                />
+                                <ul class="demo text-black text-[16px]">
+                                    {demoes[v].map((v) => (
+                                        <li
+                                            data-route={v.route}
+                                            class="demo"
+                                            title={v.desc}
+                                        >
+                                            {v.title}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </li>
+                        </>
+                    ))
+            }
+            <style lang="scss">
+                .label {
+                    cursor: pointer;
+                    user-select: none;
+                }
+                .toggle + .demo {
+                    display: none;
+                }
+                .toggle:checked + .demo {
+                    display: block;
+                }
+            </style>
+        </ul>
+        <div class="mb-[50px] h-[500px] relative">
+            <iframe
+                id="iframeDemo"
+                class="mb-[50px]"
+                height="500px"
+                frameborder="0"
+            >
+            </iframe>
+            <div
+                class="loading bg-black/10 text-white flex items-center justify-center absolute top-0 right-0 bottom-0 left-0"
+            >
+                No Show
+            </div>
+        </div>
+    </main>
+</BlogPage>
+<script lang="ts">
+    const iframeDemo = document.getElementById("iframeDemo");
+    const liEl = document.querySelectorAll(".demoes .demo");
+    const loadingEl = document.querySelector(".demoes .loading");
+    liEl.forEach((li) => {
+        li.addEventListener("click", (evt) => {
+            const route = evt.target.dataset.route;
+            if (route) {
+                iframeDemo.src = route;
+                loadingEl.style.display = "flex";
+                loadingEl.innerHTML = "Loading...";
+                if (iframeDemo.attachEvent) {
+                    // IE
+                    iframeDemo.attachEvent("onload", function () {
+                        loadingEl.style.display = "none";
+                    });
+                } else {
+                    // Not IE
+                    iframeDemo.onload = function () {
+                        loadingEl.style.display = "none";
+                    };
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,76 @@
+---
+import type { Post } from "#/type";
+import { getPostsUrl } from "@blog/utils";
+import { settings, siteInfo } from "@root/src/config";
+import { Picture } from "astro-imagetools/components";
+import Content from "./Content.astro";
+
+const post: Post = Astro.props.post;
+const direction: string = Astro.props.direction;
+
+let image = post.hero;
+if (!image && post._images.length && settings.postPicture === "first") {
+    image = post._images[0].url;
+}
+if (!image) {
+    try {
+        image = siteInfo.hero
+    } catch (error) {
+        console.error(error);
+    }
+}
+---
+
+<div
+    class={`my-8 flex ${
+        direction === "left" ? "flex-row" : "flex-row-reverse"
+    } gap-6 md:gap-10 group items-start relative overflow-hidden rounded-lg bg-black/25 bg-opacity-2 h-30 md:h-[13rem]`}
+>
+    <Picture
+        src={image}
+        loading="eager"
+        alt={post.title}
+        fadeInTransition={false}
+        attributes={{
+            picture: {
+                class: "!absolute !h-full brightness-75 scale-110 w-full blur-none md:blur-[1.875rem]",
+            },
+            img: {
+                class: "!absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 object-cover",
+            },
+        }}
+    />
+    <a
+        href={getPostsUrl(post.slug)}
+        class={"shrink-0 w-4/12 h-full md:block relative hidden " +
+            (direction === "left" ? "clip_left" : "clip_right")}
+        style="z-index: 1;height: 100%;"
+    >
+        <Picture
+            src={image}
+            loading="eager"
+            alt={post.title}
+            attributes={{
+                picture: {
+                    class: "w-full !h-full bg-base-200 transition-transform group-hover:rotate-6 group-hover:scale-110",
+                },
+                img: { class: "w-full !h-full object-cover" },
+            }}
+        />
+        {
+            post.top && (
+                <div
+                    class={
+                        "absolute text-white bg-orange-400 w-[80%] text-center " +
+                        (direction === "left"
+                            ? "right-[52%] top-[4%] -rotate-[45deg]"
+                            : "left-[52%] top-[4%] rotate-[45deg]")
+                    }
+                >
+                    Top
+                </div>
+            )
+        }
+    </a>
+    <Content post={post} />
+</div>

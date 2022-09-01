@@ -1,0 +1,28 @@
+---
+import Base from "@blog/Layouts/Base/Base.astro";
+import Navbar from "@blog/ui/Navbar/Navbar.astro";
+import ThemeChange from "@blog/components/ThemeChange.astro";
+import Footer from "@blog/ui/Footer/Footer.astro";
+
+export interface Props {
+    title?: string;
+    desc?: string;
+}
+
+const { title, desc } = Astro.props as Props;
+---
+
+<Base title={title} desc={desc}>
+    <div
+        id="app"
+        class="flex flex-col items-center h-full"
+    >
+        <div class="w-full flex-1 relative z-[1]">
+            <Navbar>
+                <ThemeChange />
+            </Navbar>
+            <slot />
+        </div>
+        <Footer />
+    </div>
+</Base>

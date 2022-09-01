@@ -1,0 +1,16 @@
+{
+    "less.lint.unknownAtRules": "ignore",
+    "less.validate": false,
+    "scss.lint.unknownAtRules": "ignore",
+    "scss.validate": false,
+    "markdown-image.local.path": "/public/article",
+    "markdown-image.local.referencePath": "/article",
+    "markdown-image.base.fileNameFormat": "${mdname}_${YY}-${MM}-${DD}_${DD}-${HH}-${mm}-${ss}",
+    "templateGenerator.fields.author": "Dash",
+    "templateGenerator.fields.email": "xxx@email.com",
+    "templateGenerator.fields.link": "https://art-theme.netlify.app",
+    "templateGenerator.templatesPath": "${rootPath}/template",
+    // "browse-lite.chromeExecutable": "/usr/bin/microsoft-edge-dev",
+    "browse-lite.chromeExecutable": "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
+    "browse-lite.startUrl": "http://localhost:3000"
+}

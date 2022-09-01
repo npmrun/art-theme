@@ -1,0 +1,23 @@
+---
+import { siteInfo } from "@blog/config";
+---
+
+<footer class="p-4 text-gray-400">
+    <p class="text-sm text-base-content/70 text-center mb-2">
+        {siteInfo.siteDesc}
+    </p>
+    <p
+        id="runtime"
+        class="text-xs text-base-content/70 text-center cursor-pointer mb-2"
+    >
+        This Site Builded At {siteInfo.startTime}
+    </p>
+    <p class="text-xs text-base-content/70 text-center">
+        &copy; {new Date().getFullYear()} –
+        <a class="link" href={siteInfo.github} target="_blank">
+            {siteInfo.siteName}
+        </a>
+        Theme, Powered by
+        <a class="link" href="https://astro.build/" target="_blank"> Astro</a>
+    </p>
+</footer>

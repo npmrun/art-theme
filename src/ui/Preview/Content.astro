@@ -1,0 +1,54 @@
+---
+import { getPostsUrl } from "@blog/utils";
+import type { Post } from "#/type";
+const post: Post = Astro.props.post;
+---
+
+<div class="flex flex-col gap-4 flex-1 w-0 z-1 p-6 h-full" style="z-index: 1;">
+    <div>
+        <h2 class="text-2xl font-bold text-white">
+            <a
+                class="hover:underline hover:decoration-wavy"
+                href={getPostsUrl(post.slug)}
+            >
+                {post.title}
+            </a>
+        </h2>
+        {
+            post.pubDate && (
+                <span class="text-[12px] text-white font-normal">
+                    Created：{post.pubDate}
+                </span>
+            )
+        }
+        <div class="text-xl font-normal">
+            {
+                post.categories &&
+                    !!post.categories.length &&
+                    post.categories.map((v) => (
+                        <a
+                            class="ml-[8px] first:ml-0 text-white text-[12px] bg-orange-400 leading-[1] inline-block py-[6px] px-[12px] rounded-[16px]"
+                            href={`/category/${v}/1`}
+                        >
+                            {v}
+                        </a>
+                    ))
+            }
+        </div>
+    </div>
+    <p class="text-sm text-base-content/70 text-white over3line">
+        {post.desc}
+    </p>
+    {
+        post.top && (
+            <div
+                class={
+                    "absolute text-white bg-orange-400 w-[80%] text-center " +
+                    "left-[54.5%] top-[4%] rotate-[45deg] md:hidden"
+                }
+            >
+                Top
+            </div>
+        )
+    }
+</div>

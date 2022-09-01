@@ -1,0 +1,48 @@
+---
+import "@astrojs/tailwind/base.css"; 
+import 'viewerjs/dist/viewer.css';
+import "@blog/styles/global.scss";
+import SEO from "@blog/components/SEO/SEO.astro";
+
+export interface Props {
+	title: string;
+	desc: string;
+	icon?: string;
+	image?: string;
+}
+
+const { title, desc, image = "/placeholder-social.jpg", icon = "/astro.svg" } = Astro.props;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="icon" type="image/svg+xml" href={icon} />
+<meta name="generator" content={Astro.generator} />
+
+<SEO
+    title={title}
+    description={desc} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={Astro.url} />
+<meta property="og:title" content={title} />
+<meta property="og:desc" content={desc} />
+<meta property="og:image" content={new URL(image, Astro.url)} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:desc" content={desc} />
+<meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+<!-- og -->
+{title && <meta property="og:title" content={title} />}
+{desc && <meta property="og:desc" content={desc} />}
+<meta property="og:image" content={new URL(image, Astro.url)} />
+{title && <meta property="og:image:alt" content={title} />}
+{title && <meta property="og:site_name" content={title} />}
+<meta property="og:type" content="object" />
+<meta property="og:url" content={Astro.site} />

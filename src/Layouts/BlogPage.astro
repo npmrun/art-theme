@@ -1,0 +1,26 @@
+---
+import SitePage from "@blog/Layouts/Base/SitePage.astro";
+import Hero from "@blog/ui/Hero/Hero.astro";
+
+interface Props {
+    title?: string;
+    desc?: string;
+    hero: string;
+    heroPosition: string;
+}
+
+const {
+    title,
+    desc,
+    hero,
+    heroPosition,
+} = Astro.props as Props;
+
+---
+
+<SitePage title={title} desc={desc}>
+    <Hero bg={hero} position={heroPosition} />
+    <div class="p-4 pb-10 max-w-3xl mx-auto">
+        <slot />
+    </div>
+</SitePage>

@@ -1,0 +1,120 @@
+---
+import SitePage from "@blog/Layouts/Base/SitePage.astro";
+import Date from "@blog/components/utilities/Date.astro";
+import { isDev, isProd, settings, siteInfo } from "@blog/config";
+import type { Post } from "#/type";
+import Hero from "@blog/ui/Hero/Hero.astro";
+
+export interface Props {
+    content: Post;
+}
+
+const { content } = Astro.props as Props;
+
+const showToc = (content.toc ?? true) && settings.showTOC;
+
+let image = content.hero;
+if (!image && content._images.length && settings.postPicture === "first") {
+    image = content._images[0].url;
+}
+if (!image) {
+    try {
+        image = siteInfo.hero
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+---
+<SitePage title={content.title} desc={content.desc}>
+    <Hero bg={image} position={content.heroPosition}>
+        {!content.heroHideTitle && content.title}
+    </Hero>
+    <div class="p-4 pb-10 max-w-4xl mx-auto">
+        <main>
+            <article>
+                <!-- prose -->
+                <div class="py-6 mx-auto">
+                    <h1 class="text-[30px] my-[20px] gap-3 md:flex block items-baseline">
+                        <div>{content.title}</div>
+                        {
+                            content.author && (
+                                <div class="text-sm text-base-content/70 text-gray-400 align-middle">
+                                    {content.pubDate && <Date date={content.pubDate} />} By{" "}
+                                    {content.author}
+                                </div>
+                            )
+                        }
+                    </h1>
+
+                    {
+                        content.categories && !!content.categories.length && (
+                            <div class="flex gap-3 my-[20px] items-center">
+                                {content.categories.map((v) => (
+                                    <a
+                                        href={`/category/${v}/1`}
+                                        class="bg-orange-600 text-white px-[12px] py-[6px] leading-[1] rounded-[15px]"
+                                    >
+                                        {v}
+                                    </a>
+                                ))}
+                            </div>
+                        )
+                    }
+
+                    <hr class="my-[30px]" />
+                    <div class="relative">
+                        <div class:list={['typography', content.mode]}>
+                            <slot />
+                        </div>
+                        <script src="@blog/scripts/main.ts"></script>
+                        {
+                            showToc &&
+                                !!content._head &&
+                                !!content._head.length && (
+                                    <div class="absolute left-full ml-[50px] top-[50px] h-full lg:block hidden whitespace-nowrap">
+                                        <div class="sticky top-[100px]">
+                                            {content._head.map((v) => (
+                                                <a
+                                                    class="block"
+                                                    style={{
+                                                        marginLeft:
+                                                            (v.level - 2) * 20 +
+                                                            "px",
+                                                    }}
+                                                    href={"#" + v.title}
+                                                >
+                                                    - {v.title}
+                                                </a>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                        }
+                    </div>
+                </div>
+            </article>
+            {
+                isProd && (
+                    <script is:inline src="https://giscus.app/client.js"
+                        data-repo="npmrun/art-theme"
+                        data-repo-id="R_kgDOH64YiQ"
+                        data-category="Announcements"
+                        data-category-id="DIC_kwDOH64Yic4CRK-B"
+                        data-mapping="pathname"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="top"
+                        data-theme="preferred_color_scheme"
+                        data-lang="en"
+                        crossorigin="anonymous"
+                        async>
+                    </script>
+                    <div class="giscus"></div>
+                    <div class="giscus-frame"></div>
+                )
+            }
+        </main>
+    </div>
+</SitePage>

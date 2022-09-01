@@ -1,0 +1,131 @@
+---
+import ThemeChange from "@blog/components/ThemeChange.astro";
+import { nav, siteInfo } from "@root/src/config";
+import { Icon } from "astro-icon";
+import Menu from "./_ui/Menu.astro";
+import MenuItem from "./_ui/MenuItem.astro";
+---
+
+<script src="./main.ts"></script>
+<style lang="scss">
+    .hover-navbar {
+        @apply bg-white/80 text-black;
+    }
+</style>
+<div
+    id="navbar"
+    class="fixed z-[99] w-full bg-white/5 shadow backdrop-blur text-white transition"
+>
+    <div class="px-[25px] h-[45px] flex items-center justify-between">
+        <a href="/" class="text-[20px] flex items-center group">
+            <img
+                src={siteInfo.avatar}
+                alt={siteInfo.siteName}
+                class="h-10 w-10 rounded-full"
+            />
+            <span class="ml-3 group-hover:underline group-hover:decoration-wavy"
+                >{siteInfo.siteName}
+            </span>
+        </a>
+        <Menu className="ml-[35px] w-0 flex-1 hidden md:flex">
+            {
+                nav.map((item, index) => (
+                    <MenuItem href={item.slug}>
+                        {item.icon && (
+                            <Icon class="h-5 w-5 mr-[4px]" name={item.icon} />
+                        )}
+                        <span class="text-[14px]">{item.title}</span>
+                        {!!item.children?.length && (
+                            <svg
+                                class="fill-current"
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                            >
+                                <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z" />
+                            </svg>
+                        )}
+                    </MenuItem>
+                ))
+            }
+        </Menu>
+        <Menu>
+            <!-- <ThemeChange /> -->
+            <div id="meunButton" class="md:hidden p-[8px] text-[14px]">
+                Menu
+            </div>
+        </Menu>
+    </div>
+</div>
+
+<div
+    id="mobile-mask"
+    class="md:hidden fixed left-0 right-0 bottom-0 top-0 bg-black/30 z-[99] pointer-events-none opacity-0 transition-opacity duration-300"
+>
+</div>
+<div
+    id="mobile-menu"
+    class="md:hidden fixed right-0 top-0 bottom-0 z-[99] w-[60%] bg-white transition-transform duration-300 translate-x-full"
+>
+    <div class="px-[8px] py-[12px] flex flex-col h-full">
+        <div class="flex items-center border-b pb-[8px]">
+            <img
+                src={siteInfo.avatar}
+                alt={siteInfo.siteName}
+                class="h-10 w-10 rounded-full"
+            />
+            <span class="ml-3 group-hover:underline group-hover:decoration-wavy"
+                >{siteInfo.siteName}
+            </span>
+        </div>
+        <ul class="mt-[15px] flex-1 h-0 overflow-auto">
+            {
+                nav.map((item, index) => (
+                    <li>
+                        <a
+                            href={item.slug}
+                            class="flex items-center px-[15px] text-[14px] leading-[1] h-[45px] active:bg-black/4."
+                        >
+                            <span>{item.title}</span>
+                            {item.icon && (
+                                <Icon
+                                    class="h-5 w-5 ml-[4px] text-[0]"
+                                    name={item.icon}
+                                />
+                            )}
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>
+<style lang="scss">
+    .show {
+        transform: translateX(0);
+    }
+</style>
+<script lang="ts">
+    const meunButton = document.getElementById("meunButton");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const mobileMask = document.getElementById("mobile-mask");
+    meunButton.addEventListener("click", () => {
+        let isHave = mobileMenu.classList.contains("show");
+        if (!isHave) {
+            mobileMenu.classList.add("show");
+            mobileMask.style.opacity = 1;
+            mobileMask.style.pointerEvents = "auto";
+            document.body.style.overflow = "hidden";
+        }
+    });
+    mobileMask.addEventListener("click", () => {
+        let isHave = mobileMenu.classList.contains("show");
+        if (isHave) {
+            mobileMenu.classList.remove("show");
+            mobileMask.style.opacity = 0;
+            mobileMask.style.pointerEvents = "none";
+            document.body.style.overflow = "auto";
+        }
+    });
+</script>

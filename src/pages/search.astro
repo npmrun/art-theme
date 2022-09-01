@@ -1,0 +1,11 @@
+---
+import BlogPage from "@blog/Layouts/BlogPage.astro";
+import SearchInput from "@blog/ui/SearchInput/SearchInput.astro";
+import { siteInfo } from "@blog/config";
+---
+
+<BlogPage hero={siteInfo.hero} heroPosition={siteInfo.heroPosition}>
+    <main>
+        <SearchInput />
+    </main>
+</BlogPage>

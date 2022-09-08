@@ -82,7 +82,8 @@ export default function remarkCode() {
                         <div class="custom-carbon-dot custom-carbon-dot--yellow"></div>
                         <div class="custom-carbon-dot custom-carbon-dot--green"></div>
                         <div class="text">${!!lang ? `<span class="language">${lang}</span>` : ""}</div>
-                        <div class="copy-btn" data-clipboard-text="${value}">Copy</div>
+                        <div class="copy-btn">复制</div>
+                        <textarea placeholder="." title="." style="display: none;">${value}</textarea>
                     </div>
                     </figcaption>
                     <pre class="${classes.join(

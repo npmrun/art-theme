@@ -10,30 +10,31 @@ for (let i = 0, linksLength = links.length; i < linksLength; i++) {
     }
 }
 
-let timeId: ReturnType<typeof setTimeout>;
-var clipboard = new ClipboardJS(".typography .code-figure .copy-btn");
-clipboard.on("success", function (e) {
+var clipboard = new ClipboardJS('.typography .code-figure .copy-btn', {
+    text: function (trigger) {
+      return trigger.nextElementSibling.innerHTML;
+    },
+  });
+  clipboard.on('success', function (e) {
     const el = e.trigger as HTMLDivElement;
     e.clearSelection();
-    el.style.color = "green";
-    el.innerHTML = "Copied";
-    clearTimeout(timeId);
-    timeId = setTimeout(() => {
-        el.style.color = "";
-        el.innerHTML = "Copy";
+    el.style.color = 'green';
+    el.innerHTML = 'Copied';
+    setTimeout(() => {
+      el.style.color = '';
+      el.innerHTML = 'Copy';
     }, 2500);
-});
-
-clipboard.on("error", function (e) {
+  });
+  
+  clipboard.on('error', function (e) {
     const el = e.trigger as HTMLDivElement;
-    el.style.color = "red";
-    el.innerHTML = "Copy";
-    clearTimeout(timeId);
-    timeId = setTimeout(() => {
-        el.style.color = "";
-        el.innerHTML = "Copy";
+    el.style.color = 'red';
+    el.innerHTML = 'Copy';
+    setTimeout(() => {
+      el.style.color = '';
+      el.innerHTML = 'Copy';
     }, 2500);
-});
+  });
 
 const gallery = new View(document.querySelector(".typography"));
 const flows = document.querySelectorAll(".typography .flow");

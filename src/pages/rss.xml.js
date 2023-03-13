@@ -7,7 +7,7 @@ const posts = await published();
 export const get = () => {
   return rss({
     title: siteInfo.siteName,
-    desc: siteInfo.siteDesc,
+    description: siteInfo.siteDesc,
     stylesheet: true,
     customData: `<language>${siteInfo.lang || 'en-us'}</language>`,
     site: import.meta.env.SITE,
@@ -15,7 +15,7 @@ export const get = () => {
       link: getPostsUrl(post.slug),
       title: post.title,
       pubDate: post.pubDate || "",
-      desc: post.desc,
+      description: post.desc || "",
     })),
   });
 };

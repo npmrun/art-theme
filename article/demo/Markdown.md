@@ -3,6 +3,7 @@ title: Markdown
 desc: Test Markdown
 pubDate: 2022/8/31 00:07:30
 author: Dash
+# theme: normal
 top: true
 hero: "/placeholder-hero.jpg"
 categories: 
@@ -79,56 +80,75 @@ declare const magicNumber: number
 myArray.forEach(() => { }) // fat arrow syntax
 ```
 
-### LaTeX
-`$Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$` 。
+### MathJax
+$\Gamma(n) = (n-1)!\quad\forall n\in\mathbb N$
 
-```mathjax
+$$	x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} $$
+
 $$
-x = \dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a} 
+L = \frac{1}{2} \rho v^2 S C_L
 $$
-```
+
+## mermaid
+
 ### flow
 ```flow
-st=>start: Improve your
-l10n process!
-e=>end: Continue to have fun!:>https://youtu.be/YQryHo1iHb8[blank]
-op1=>operation: Go to locize.com:>https://locize.com[blank]
-sub1=>subroutine: Read the awesomeness
-cond(align-next=no)=>condition: Interested to
-getting started?
-io=>inputoutput: Register:>https://www.locize.app/register[blank]
-sub2=>subroutine: Read about improving
-your localization workflow
-or another source:>https://medium.com/@adrai/8-signs-you-should-improve-your-localization-process-3dc075d53998[blank]
-op2=>operation: Login:>https://www.locize.app/login[blank]
-cond2=>condition: valid password?
-cond3=>condition: reset password?
-op3=>operation: send email
-sub3=>subroutine: Create a demo project
-sub4=>subroutine: Start your real project
-io2=>inputoutput: Subscribe
-
-st->op1->sub1->cond
-cond(yes)->io->op2->cond2
-cond2(no)->cond3
-cond3(no,bottom)->op2
-cond3(yes)->op3
-op3(right)->op2
-cond2(yes)->sub3
-sub3->sub4->io2->e
-cond(no)->sub2(right)->op1
-
-st@>op1({"stroke":"Red"})@>sub1({"stroke":"Red"})@>cond({"stroke":"Red"})@>io({"stroke":"Red"})@>op2({"stroke":"Red"})@>cond2({"stroke":"Red"})@>sub3({"stroke":"Red"})@>sub4({"stroke":"Red"})@>io2({"stroke":"Red"})@>e({"stroke":"Red","stroke-width":6,"arrow-end":"classic-wide-long"})
+flowchart TD
+    A[/Christmas\]
+    A -->|Get money| B[\Go shopping/]
+    B --> C{Let me thinksssss<br/>ssssssssssssssssssssss<br/>sssssssssssssssssssssssssss}
+    C -->|One| D[/Laptop/]
+    C -->|Two| E[\iPhone\]
+    C -->|Three| F[Car]
 ```
 
-sequence:
+### sequence
 
 ```sequence
-Alice->Bob: Hello Bob, how are you?
-Note right of Bob: Bob thinks
-Bob-->Alice: I am good thanks!
-```
+sequenceDiagram
+			accTitle: test the accTitle
+			accDescr: Test a description
 
+			participant Alice
+			participant Bob
+			participant John as John<br />Second Line
+			autonumber 10 10
+			rect rgb(200, 220, 100)
+			rect rgb(200, 255, 200)
+
+			Alice ->> Bob: Hello Bob, how are you?
+			Bob-->>John: How about you John?
+			end
+
+			Bob--x Alice: I am good thanks!
+			Bob-x John: I am good thanks!
+			Note right of John: John thinks a long<br />long time, so long<br />that the text does<br />not fit on a row.
+
+			Bob-->Alice: Checking with John...
+			Note over John:wrap: John looks like he's still thinking, so Bob prods him a bit.
+			Bob-x John: Hey John - we're still waiting to know<br />how you're doing
+			Note over John:nowrap: John's trying hard not to break his train of thought.
+			Bob-x John:wrap: John! Are you still debating about how you're doing? How long does it take??
+			Note over John: After a few more moments, John<br />finally snaps out of it.
+			end
+
+			autonumber off
+			alt either this
+			Alice->>+John: Yes
+			John-->>-Alice: OK
+			else or this
+			autonumber
+			Alice->>John: No
+			else or this will happen
+			Alice->John: Maybe
+			end
+			autonumber 200
+			par this happens in parallel
+			Alice -->> Bob: Parallel message 1
+			and
+			Alice -->> John: Parallel message 2
+			end
+```
 ## List Types
 
 #### Ordered List

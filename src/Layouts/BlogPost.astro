@@ -12,6 +12,8 @@ export interface Props {
 const { content } = Astro.props as Props;
 
 const showToc = (content.toc ?? true) && settings.showTOC;
+const defaultTheme = settings.articleTheme == 'github' ? "markdown-body" : "typography"
+const articleTheme = content.theme !== undefined ? content.theme == 'github' ? "markdown-body" : "typography": defaultTheme
 
 let image = content.hero;
 if (!image && content._images.length && settings.postPicture === "first") {
@@ -64,7 +66,7 @@ if (!image) {
 
                     <hr class="my-[30px]" />
                     <div class="relative">
-                        <div class:list={['typography', content.mode]}>
+                        <div class:list={["my-article", articleTheme, content.mode]}>
                             <slot />
                         </div>
                         <script src="@blog/scripts/main.ts"></script>

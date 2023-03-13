@@ -26,37 +26,33 @@ export const nav = [
     {
         title: "Search",
         slug: "/search",
-        icon: false,
         children: [],
     },
     {
         title: "Category",
         slug: "/categories",
-        icon: false,
         children: [],
     },
     {
         title: "About",
         slug: "/about",
-        icon: "emojione-v1:beer-mug",
         children: [],
     },
     {
         title: "Contact",
         slug: "/contact",
-        icon: "emojione:call-me-hand",
         children: [],
     },
     {
         title: "Demo",
         slug: "/demo",
-        icon: false,
         children: [],
     },
 ];
 
 export const settings = {
-    showTOC: true,
+    showTOC: false,
+    articleTheme: "github",
     postPicture: "first",
     categories: [
         {

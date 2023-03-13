@@ -2,6 +2,7 @@ import { MarkdownInstance } from "astro";
 
 export type Post = {
   title: string;
+  theme: "github" | "normal";
   slug: string;
   desc: string;
   author: string;

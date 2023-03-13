@@ -11,6 +11,16 @@ import MenuItem from "./_ui/MenuItem.astro";
     .hover-navbar {
         @apply bg-white/80 text-black;
     }
+    .headroom {
+        will-change: transform;
+        transition: transform 200ms linear;
+    }
+    .headroom--pinned {
+        transform: translateY(0%);
+    }
+    .headroom--unpinned {
+        transform: translateY(-100%);
+    }
 </style>
 <div
     id="navbar"
@@ -31,9 +41,6 @@ import MenuItem from "./_ui/MenuItem.astro";
             {
                 nav.map((item, index) => (
                     <MenuItem href={item.slug}>
-                        {item.icon && (
-                            <Icon class="h-5 w-5 mr-[4px]" name={item.icon} />
-                        )}
                         <span class="text-[14px]">{item.title}</span>
                         {!!item.children?.length && (
                             <svg

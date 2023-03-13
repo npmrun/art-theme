@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import "github-markdown-css";
 
 @font-face {
     font-family: "Cascadia Mono";
@@ -11,6 +12,38 @@
 
 $color: rgb(234, 88, 12);
 $linght-color: rgba(234, 88, 12, 0.2);
+
+.my-article{
+    .mermaid{
+        display: none;
+    }
+
+    .mermaid[data-processed="true"]{
+        display: flex;
+        justify-content: center;
+    }
+    .sequence {
+        overflow: auto;
+        width: 100%;
+    }
+    .sequence svg {
+        margin: 0 auto;
+    }
+    .flow {
+        overflow: auto;
+        width: 100%;
+    }
+    .flow svg {
+        margin: 0 auto;
+    }
+    mjx-container[jax="SVG"] {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    mjx-container[jax="SVG"][display="true"] svg {
+        margin: 0 auto;
+    }
+}
 
 .typography {
     color: #2c2e3b;
@@ -177,13 +210,6 @@ $linght-color: rgba(234, 88, 12, 0.2);
         font-weight: bold;
         color: $linght-color;
     }
-    mjx-container[jax="SVG"] {
-        display: inline-block;
-        vertical-align: middle;
-    }
-    mjx-container[jax="SVG"][display="true"] svg {
-        margin: 0 auto;
-    }
     code {
         // border-radius: 0.25rem;
         // background-color: #fff5f5;
@@ -245,20 +271,37 @@ $linght-color: rgba(234, 88, 12, 0.2);
         padding: 16px;
         overflow-wrap: break-word;
     }
+}
 
-    .sequence {
-        overflow: auto;
-        width: 100%;
+.markdown-body {
+    --color-accent-fg: #555 !important;
+    --color-canvas-default: transparent !important;
+    --color-accent-emphasis: #555 !important;
+    .code-figure {
+        margin: 0 0;
+        margin-bottom: 16px;
     }
-    .sequence svg {
+    ol,
+    ul {
+        margin: 6px 0 6px 15px;
+    }
+    ul ul li {
+        list-style-type: circle;
+    }
+    ol li {
+        list-style: decimal;
+    }
+    li {
+        list-style: disc;
+    }
+    img {
+        max-width: 100%;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 0;
+        vertical-align: middle;
         margin: 0 auto;
-    }
-    .flow {
-        overflow: auto;
-        width: 100%;
-    }
-    .flow svg {
-        margin: 0 auto;
+        cursor: pointer;
     }
 }
 
@@ -274,10 +317,11 @@ iframe {
     border-radius: 0.5em;
     overflow: hidden;
 }
-.typography pre[class*="language-"] {
-    margin-top: 0;
+
+.code-figure pre[class*="language-"] {
     border-radius: 0;
     margin-bottom: 0;
+    margin-top: 0;
 }
 
 figcaption.line-numbers-head {
@@ -287,6 +331,7 @@ figcaption.line-numbers-head {
     zoom: 1;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
+    border-bottom: 1px solid #e2e2e2;
     .language {
         font-size: 0.6em;
         margin-left: 5px;
@@ -315,7 +360,7 @@ figcaption.line-numbers-head .custom-carbon-dot--green {
 
 figcaption.line-numbers-head .custom-carbon {
     padding: 2px 0 0 9px;
-    height: 2.5em;
+    height: 2em;
     display: flex;
     align-items: center;
     .text {
@@ -352,3 +397,4 @@ figcaption.code-caption {
     padding: var(--prism-block-padding-y) var(--prism-block-padding-x);
     background-color: var(--prism-background);
 }
+// 代码块apple样式End

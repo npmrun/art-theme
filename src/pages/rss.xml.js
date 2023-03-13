@@ -14,7 +14,7 @@ export const get = () => {
     items: posts.map((post) => ({
       link: getPostsUrl(post.slug),
       title: post.title,
-      pubDate: post.pubDate,
+      pubDate: post.pubDate || "",
       desc: post.desc,
     })),
   });

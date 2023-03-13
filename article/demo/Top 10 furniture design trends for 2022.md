@@ -1,6 +1,7 @@
 ---
 title: Top 10 furniture design trends for 2022
 desc: Desc
+theme: normal
 pubDate: 2022/8/22 21:04:52
 author: Pouya
 hero: "/placeholder-about.jpg"

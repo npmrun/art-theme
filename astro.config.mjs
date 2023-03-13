@@ -7,24 +7,33 @@ import robotsTxt from "astro-robots-txt";
 import compress from "astro-compress";
 import path from "path";
 // import partytown from "@astrojs/partytown";
+import remarkSmartypants from "remark-smartypants";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import remarkMath from 'remark-math'
+import rehypeMathjax from 'rehype-mathjax'
 
 import sitemap from "@astrojs/sitemap";
 import remarkParseVar from "./plugins/remark-parseVar.mjs";
 import remarkCode from "./plugins/remark-code.mjs";
+import remarkFlow from './plugins/remark-flow.mjs';
 
 export default defineConfig({
     markdown: {
+        gfm: true,
         syntaxHighlight: "prism",
         remarkPlugins: [
-            "remark-gfm",
-            "remark-smartypants",
+            remarkFlow,
+            remarkMath,
+            remarkSmartypants,
             remarkParseVar,
             remarkCode,
         ],
         rehypePlugins: [
-            "rehype-slug",
+            rehypeMathjax,
+            rehypeSlug,
             [
-                "rehype-autolink-headings",
+                rehypeAutolinkHeadings,
                 {
                     behavior: "wrap",
                 },
@@ -48,9 +57,25 @@ export default defineConfig({
         astroImageTools,
         vue(),
         mdx({
-            remarkPlugins: {
-                extends: [remarkParseVar, remarkCode],
-            },
+            remarkPlugins: [
+                remarkFlow,
+                remarkMath,
+                remarkSmartypants,
+                remarkParseVar,
+                remarkCode,
+            ],
+            rehypePlugins: [
+                rehypeMathjax,
+                rehypeSlug,
+                [
+                    rehypeAutolinkHeadings,
+                    {
+                        behavior: "wrap",
+                    },
+                ],
+            ],
+            gfm: true,
+            syntaxHighlight: "prism",
         }),
         sitemap(),
     ],

@@ -1,6 +1,15 @@
 import View from "viewerjs";
-import FlowChart from "flowchart.js";
 import ClipboardJS from "clipboard";
+import mermaid from "mermaid"
+
+mermaid.init({
+    theme: 'neutral',
+    // logLevel: 3,
+    securityLevel: 'loose',
+    flowchart: { curve: 'basis' },
+    gantt: { axisFormat: '%m/%d/%Y' },
+    sequence: { actorMargin: 50 },
+}, `.my-article .mermaid`);
 
 const links = document.links;
 for (let i = 0, linksLength = links.length; i < linksLength; i++) {
@@ -10,7 +19,7 @@ for (let i = 0, linksLength = links.length; i < linksLength; i++) {
     }
 }
 
-var clipboard = new ClipboardJS('.typography .code-figure .copy-btn', {
+var clipboard = new ClipboardJS('.my-article .code-figure .copy-btn', {
     text: function (trigger) {
       return trigger.nextElementSibling.innerHTML;
     },
@@ -36,35 +45,4 @@ var clipboard = new ClipboardJS('.typography .code-figure .copy-btn', {
     }, 2500);
   });
 
-const gallery = new View(document.querySelector(".typography"));
-const flows = document.querySelectorAll(".typography .flow");
-flows.forEach((v: HTMLElement) => {
-    const text = v.innerText.replace(/_::_/g, "\n");
-    var diagram = FlowChart.parse(text);
-    v.innerHTML = "";
-    diagram.drawSVG(v);
-});
-
-window.MathJax = {
-    tex: {
-        inlineMath: [
-            ["$", "$"],
-            ["\\(", "\\)"],
-        ],
-    },
-    svg: {
-        displayAlign: "center",
-        fontCache: "global",
-    },
-    options: {
-        processHtmlClass: "tex2jax_process",
-        ignoreHtmlClass: ".*",
-    },
-};
-
-(function () {
-    var script = document.createElement("script");
-    script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js";
-    script.async = true;
-    document.head.appendChild(script);
-})();
+new View(document.querySelector(".my-article"));

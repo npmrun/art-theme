@@ -5,7 +5,6 @@
     "scripts": {
         "preinstall": "npx only-allow pnpm",
         "prepareIndex": "tsx ./scripts/search/prepare-index.ts",
-        "postinstall": "npm run hack",
         "dev": "astro dev",
         "start": "astro dev",
         "build": "npm run prepareIndex && astro build",

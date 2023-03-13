@@ -23,10 +23,10 @@ export default defineConfig({
         gfm: true,
         syntaxHighlight: "prism",
         remarkPlugins: [
-            remarkFlow,
             remarkMath,
             remarkSmartypants,
             remarkParseVar,
+            remarkFlow,
             remarkCode,
         ],
         rehypePlugins: [
@@ -52,16 +52,18 @@ export default defineConfig({
             applyBaseStyles: false,
         }),
         // partytown(),
-        compress(),
+        compress({
+            html: false
+        }),
         robotsTxt(),
         astroImageTools,
         vue(),
         mdx({
             remarkPlugins: [
-                remarkFlow,
                 remarkMath,
                 remarkSmartypants,
                 remarkParseVar,
+                remarkFlow,
                 remarkCode,
             ],
             rehypePlugins: [
@@ -85,6 +87,9 @@ export default defineConfig({
     vite: {
         ssr: {
             external: ["svgo"],
+        },
+        optimizeDeps: {
+            "exclude": ["mermaid"]
         },
         resolve: {
             alias: {

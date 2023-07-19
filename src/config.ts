@@ -9,12 +9,12 @@ export const siteInfo = {
     siteName: "Art Theme",
     siteDesc: "A Beautiful Blog To Record Life !",
     lang: "en-us",
-    icon: "https://api.lorem.space/image/face?w=96&h=96",
-    avatar: "https://api.lorem.space/image/face?w=96&h=96",
+    icon: "https://picsum.photos/96",
+    avatar: "https://picsum.photos/96",
     github: "https://github.com/npmrun/art-theme",
     get hero() {
         return (
-            "https://api.lorem.space/image?w=1280&h=780&random=" +
+            "https://picsum.photos/1280/780?random=" +
             Math.random() * 1000
         );
     },
@@ -59,7 +59,7 @@ export const settings = {
             name: "Demo",
             desc: "Some Demo",
             image:
-                "https://api.lorem.space/image?w=290&h=80&random=" +
+                "https://picsum.photos/290/80?random=" +
                 Math.random() * 1000,
             order: 1,
         },
@@ -67,7 +67,7 @@ export const settings = {
             name: "Astro",
             desc: "Astro Theme",
             image:
-                "https://api.lorem.space/image?w=290&h=80&random=" +
+                "https://picsum.photos/290/80?random=" +
                 Math.random() * 1000,
             order: 2,
         },

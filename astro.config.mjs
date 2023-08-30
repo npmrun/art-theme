@@ -4,7 +4,7 @@ import tailwind from "@astrojs/tailwind";
 import vue from "@astrojs/vue";
 import { astroImageTools } from "astro-imagetools";
 import robotsTxt from "astro-robots-txt";
-import compress from "astro-compress";
+// import compress from "astro-compress";
 import path from "path";
 // import partytown from "@astrojs/partytown";
 import remarkSmartypants from "remark-smartypants";
@@ -52,9 +52,9 @@ export default defineConfig({
             applyBaseStyles: false,
         }),
         // partytown(),
-        compress({
-            html: false
-        }),
+        // compress({
+        //     html: false
+        // }),
         robotsTxt(),
         astroImageTools,
         vue(),

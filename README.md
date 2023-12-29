@@ -17,7 +17,7 @@ npm: 8.5.5
 ## Comments
 
 You can modify the configuration of comments here.
-![image](https://github.com/npmrun/art-theme/assets/62639956/e72a2733-7470-4b41-ac59-9c96e8fa93ff)
+![image](https://github.com/npmrun/art-theme/assets/62639956/c6aaf9cb-d62e-466e-8253-66447ce5c93f)
 
 These configurations can be generated [here](https://giscus.app/); once generated, just copy and paste them.
 

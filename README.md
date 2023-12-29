@@ -14,6 +14,13 @@ node: 16.15.0
 npm: 8.5.5
 ```
 
+## Comments
+
+You can modify the configuration of comments here.
+![image](https://github.com/npmrun/art-theme/assets/62639956/f5da10d2-6201-426d-8659-a802952b1be1)
+
+These configurations can be generated [here](https://giscus.app/); once generated, just copy and paste them.
+
 ## CHANGLOG
 
 ### 2023-03-13

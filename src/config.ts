@@ -6,11 +6,11 @@ export const isProd = MODE === "production";
 export const pageSize = 10;
 
 export const siteInfo = {
-    siteName: "Art Theme",
-    siteDesc: "A Beautiful Blog To Record Life !",
+    siteName: "小白菜pakchoi ",
+    siteDesc: "Some thing for nothing",
     lang: "en-us",
-    icon: "https://picsum.photos/96",
-    avatar: "https://picsum.photos/96",
+    icon: "https://fastly.jsdelivr.net/gh/emjio/picture@main/img/2024-3-7/avatar.jpg",
+    avatar: "https://fastly.jsdelivr.net/gh/emjio/picture@main/img/2024-3-7/avatar.jpg",
     github: "https://github.com/npmrun/art-theme",
     get hero() {
         return (
@@ -19,7 +19,7 @@ export const siteInfo = {
         );
     },
     heroPosition: "center",
-    startTime: "6/8/2022 10:28:00",
+    startTime: "3/7/2024 14:52:00",
 };
 
 export const nav = [
@@ -41,11 +41,6 @@ export const nav = [
     {
         title: "Contact",
         slug: "/contact",
-        children: [],
-    },
-    {
-        title: "Demo",
-        slug: "/demo",
         children: [],
     },
 ];
